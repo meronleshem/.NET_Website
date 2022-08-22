@@ -1,0 +1,146 @@
+﻿@page
+@model TestASP.Pages.Players.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <td><button asp-page="" asp-page-handler="Q1">Order Not c-s</button></td>
+            <td><button asp-page="" asp-page-handler="Q2">Order Not c-s</button></td>
+            <td><button asp-page="" asp-page-handler="Q3">All Games</button></td>
+            <td><button asp-page="" asp-page-handler="Q4">Distinct Games</button></td>
+            <td><button asp-page="" asp-page-handler="Q6">Player Games Count</button></td>
+            <td><button asp-page="" asp-page-handler="Q7">Table By Count</button></td>
+        </tr>
+        <tr>
+            <td><button asp-page="" asp-page-handler="Q5">By Player</button></td>
+            <td>@Html.DropDownListFor(m => m.Num, new SelectList(Model.TblPlayers.Select(p => p.Num)))</td>
+        </tr>
+    </table>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TblPlayers[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblPlayers[0].Num)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblPlayers[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblPlayers[0].Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblPlayers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TblGames[0].PlayerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblGames[0].Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblGames[0].Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblGames)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                @*<td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Query6 != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Query6[0].PlayerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Query6[0].GamesCount)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Query6)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlayerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GamesCount)
+                    </td>
+                </tr>
+
+
+            }
+
+        </tbody>
+    </table>
+}
